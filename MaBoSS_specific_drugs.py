@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on November 24 2017
-@author: Jonas BÉAL
-jonas.beal@curie.fr
+@authors: Jonas BÉAL, Arnau MONTAGUD
+jonas.beal@curie.fr, arnau.montagud@bsc.es
 """
 #%% Imports
 
