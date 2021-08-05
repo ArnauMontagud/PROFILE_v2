@@ -1,0 +1,140 @@
+---
+title: "CL_plot"
+author: "Jonas BÉAL"
+date: "01/07/2021"
+output: html_document
+---
+
+First import the required packages.
+
+```{r setup, include=FALSE}
+
+#Packages
+if (!require("pacman")) install.packages("pacman")
+list.of.packages <- c("ggplot2", "tidyverse", "magrittr", "factoextra", "gghalves", "ggpubr","ggrepel","patchwork")
+pacman::p_load(list.of.packages, character.only = TRUE)
+
+```
+
+
+
+```{r Data preparation, echo=FALSE, message=FALSE, warning=FALSE}
+load("data_plot_CL.Rdata")
+load("correspondance.Rdata")
+
+listed_nodes <- c("HSPs", "AKT", "TERT", "ERK", "EGFR", "MEK1_2", "PI3K", "AR", "Caspase8", "cFLAR", "GLUT1", "HIF-1", "MYC_MAX", "p14ARF", "ROS", "SPOP")
+my_cell_lines <- c("BPH-1", "PC-3", "RWPE2-W99", "22RV1", "VCaP", "NCI-H660", "DU-145", "LNCaP-Clone-FGC", "PWR-1E", "RWPE-1")
+
+
+plot_data <- filter(data_plot_CL, Patient_ID %in% my_cell_lines) %>%
+  left_join(select(correspondance, Drug_Name, Drug_Target)) %>%
+  group_by(Patient_ID, Drug_Target, TCGA_DESC) %>%
+  summarise(Z_SCORE=mean(Z_SCORE), N=n()) %>%
+  mutate(DR=case_when(
+    Drug_Target %in% listed_nodes ~ Drug_Target,
+    TRUE ~ "Other targets"
+  )) %>%
+  ungroup %>%
+  mutate(Patient_ID=if_else(Patient_ID=="LNCaP-Clone-FGC", "LNCap", Patient_ID),
+         DR=factor(DR, levels=c("AKT", "AR", "EGFR", "ERK", "HSPs", "MEK1_2", "PI3K", "TERT", "Other targets")))
+```
+
+```{r plot, echo=FALSE}
+plot_data$Patient_ID2 = factor(plot_data$Patient_ID,
+                               levels=c("LNCap","22RV1","BPH-1","DU-145","PC-3","PWR-1E","VCaP"),
+                               labels=c("LNCap","22RV1","BPH-1","DU-145","PC-3","PWR-1E","VCaP"))
+
+plot_CL1 <- ggplot(plot_data, aes(y=Z_SCORE)) +
+  geom_half_boxplot(outlier.shape = NA) +
+  geom_jitter(aes(x=0.3, color=DR, size=DR, alpha=DR),
+              height = 0, width = 0.2) +
+  scale_color_manual(values=c("HSPs"="#800000FF", "AKT"="#767676FF", "ERK"="#FFA319FF", "TERT"="#8A9045FF",
+                              "AR"="#155F83FF", "EGFR"="#C16622FF", "MEK1_2"="#8F3931FF", "PI3K"="#350E20FF",
+                              "Other targets"="grey70")) +
+  scale_size_manual(values=c("HSPs"=3, "AKT"=3, "ERK"=3, "TERT"=3,
+                             "AR"=3, "EGFR"=3, "MEK1_2"=3, "PI3K"=3,
+                             "Other targets"=1)) +
+  scale_alpha_manual(values=c("HSPs"=1, "AKT"=1, "ERK"=1, "TERT"=1, 
+                              "AR"=1, "EGFR"=1, "MEK1_2"=1, "PI3K"=1,
+                              "Other targets"=0.5)) +
+  labs(y="Z-score",
+       color="Target nodes:",
+       size="Target nodes:",
+       alpha="Target nodes:"
+       ) +
+  theme_pubclean() +
+  theme(legend.position = "top",
+        legend.title = element_text(face="bold"),
+        axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        # strip.background = element_blank(),
+        legend.key=element_blank()) +
+  facet_grid(~Patient_ID2)
+
+plot_CL1
+
+```
+```{r modify plot, echo=FALSE}
+library(gtable)
+library(grid)
+plot_CL_table<-ggplot_gtable(ggplot_build(plot_CL1))
+plot_CL_table$widths[5] = 3*plot_CL_table$widths[5]
+grid.draw(plot_CL_table)
+
+png(
+  filename = "Fig6_CL.png",
+  units = "in",
+  width = 7,
+  height = 3.5,
+  res = 300
+)
+grid.draw(plot_CL_table)
+dev.off()
+
+```
+
+```{r SuppMat figure, echo=FALSE}
+
+plot_data2 <- data_plot_CL %>%
+  left_join(select(correspondance, Drug_Name, Drug_Target)) %>%
+  filter(Drug_Target %in% listed_nodes) %>%
+  group_by(Patient_ID, Drug_Target, TCGA_DESC) %>%
+  summarise(Z_SCORE=mean(Z_SCORE), N=n()) %>%
+  mutate(DR=case_when(
+    (Patient_ID == "LNCaP-Clone-FGC") ~ "LNCaP",
+    Patient_ID %in% my_cell_lines[-8] ~ "Other PC",
+    TRUE ~ "Remaining CL"
+  )) %>%
+  ungroup 
+
+plot_drugs <-
+  ggplot(plot_data2, aes(y=Z_SCORE)) +
+  geom_half_boxplot(outlier.shape = NA) +
+    facet_grid(~Drug_Target) +
+  geom_jitter(data=filter(plot_data2, DR== "Remaining CL"), aes(x=0.3, color=DR, size=DR, alpha=DR), 
+              height = 0, width = 0.2)  +
+  geom_jitter(data=filter(plot_data2, DR== "Other PC"), aes(x=0.3, color=DR, size=DR, alpha=DR), 
+              height = 0, width = 0.2)  +
+  geom_jitter(data=filter(plot_data2, DR== "LNCaP"), aes(x=0.3, color=DR, size=DR, alpha=DR), 
+              height = 0, width = 0.2)  +
+  scale_color_manual(values=c("LNCaP"="#800000FF", "Other PC"="#155F83FF", "Remaining CL"="grey70")) +
+  scale_size_manual(values=c("LNCaP"=3, "Other PC"=3, "Remaining CL"=1)) +
+  scale_alpha_manual(values=c("LNCaP"=1, "Other PC"=1, "Remaining CL"=0.25)) +
+  labs(y="Z-score",
+       color="Cell lines:",
+       size="Cell lines:",
+       alpha="Cell lines:"
+       ) +
+  theme_pubclean() +
+  theme(legend.position = "top",
+        legend.title = element_text(face="bold"),
+        axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.key=element_blank()) +
+  facet_grid(~Drug_Target)
+
+plot_drugs
+
+```

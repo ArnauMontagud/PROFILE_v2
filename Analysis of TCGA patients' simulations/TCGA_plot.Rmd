@@ -1,0 +1,75 @@
+---
+title: "TCGA_plot"
+author: "Jonas BÉAL"
+date: "01/07/2021"
+output: html_document
+---
+
+First import the required packages.
+
+```{r setup, include=FALSE}
+
+#Packages
+if (!require("pacman")) install.packages("pacman")
+list.of.packages <- c("ggplot2", "tidyverse", "magrittr", "factoextra", "patchwork")
+pacman::p_load(list.of.packages, character.only = TRUE)
+
+
+```
+
+Please note that the data imported below have already been pre-processed according to the methods described in the paper.
+
+```{r plot_preparation, eval=TRUE, include=FALSE}
+
+coloursG3 <- c("Low" = "yellowgreen", "Interm" = "orange3", "High" = "black")
+r <- 7.16
+load("data_plot_TCGA.RData")
+load("res.pca.RData")
+
+
+p_prolif <- ggplot(data_plot_TCGA, aes(x=Proliferation, fill=GG3)) +
+  geom_density(show.legend = FALSE) +
+  facet_grid(GG3~.) +
+  theme_bw()+ 
+  scale_fill_manual(values=coloursG3)
+
+p_apoptosis <- ggplot(data_plot_TCGA, aes(x=Apoptosis, fill=GG3)) +
+  geom_density() +
+  facet_grid(GG3~.) +
+  scale_fill_manual(values=coloursG3,
+                    guide = guide_legend(direction = "vertical")) +
+  theme_bw() +
+  labs(fill="Gleason\ngroups")
+
+data_plot_3 <- filter(data_plot_TCGA, !is.na(GG3)) %>%
+    group_by(GG3) %>%
+    summarise(Dim.1=mean(Dim.1, na.rm=T),Dim.2=mean(Dim.2, na.rm=T))
+    
+p_bary3 <- fviz_pca_var(res.pca,scale. = r/5, repel = T,
+                        select.var = list(name=c("Proliferation", "Apoptosis",
+                                                 "DNA_Repair", "Migration",
+                                                 "Invasion"))) +
+    geom_point(data = data_plot_3, aes(x=Dim.1, y=Dim.2, color=GG3),
+               size=3, show.legend = FALSE
+               ) +
+    scale_color_manual(values=coloursG3, name="GG\nBarycent.") +
+      theme_bw() +
+  labs(title="")
+```
+
+```{r plot, eval=FALSE, include=FALSE}
+t <- (p_bary3 / (p_prolif | p_apoptosis) | guide_area()) +
+  plot_layout(guides = 'collect', widths = c(6,1)) +
+  plot_annotation(tag_level=c('A', 'B', 'C')) &
+  theme(plot.tag = element_text(size = 18))
+
+png(
+  filename = "Fig4_TCGA.png",
+  units = "in",
+  width = 8,
+  height = 6.5,
+  res = 300
+)
+t
+dev.off()
+```
