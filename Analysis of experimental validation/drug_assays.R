@@ -524,15 +524,30 @@ patchwork_HSP2[[4]][[3]] = patchwork_HSP2[[4]][[3]] + theme(
   axis.text.y = element_blank(),
   axis.title.y = element_blank()
 )
-# Save Figure 8:
+# Save Figure S40:
 png(
-  filename = "Fig8_HSP_RT.png",
+  filename = "FigS40_HSP_RT.png",
   units = "in",
   width = 15,
   height = 20,
   res = 300
 )
 patchwork_HSP2 + plot_annotation(tag_levels = "A") + plot_layout(heights = c(.7, .3, .7, .3))
+dev.off()
+
+patchwork_HSP3 = `17-DMAGt_ribbon` / `NMS-E973t_ribbon`
+patchwork_HSP3[[1]] = patchwork_HSP3[[1]] + theme(plot.title = element_blank())
+patchwork_HSP3[[2]] = patchwork_HSP3[[2]] + theme(plot.title = element_blank())
+
+# Save Figure 8:
+png(
+  filename = "Fig8_HSP_RT.png",
+  units = "in",
+  width = 15,
+  height = 15,
+  res = 300
+)
+patchwork_HSP3 + plot_annotation(tag_levels = "A")
 dev.off()
 
 # PI-103:
@@ -863,13 +878,29 @@ patchwork_PI3K[[4]][[3]] = patchwork_PI3K[[4]][[3]] + theme(
   axis.title.y = element_blank()
 )
 
-# Save Figure 9:
+# Save Figure S41:
 png(
-  filename = "Fig9_PI3K_RT.png",
+  filename = "FigS41_PI3K_RT.png",
   units = "in",
   width = 15,
   height = 20,
   res = 300
 )
 patchwork_PI3K + plot_annotation(tag_levels = "A") + plot_layout(heights = c(.7, .3, .7, .3))
+dev.off()
+
+patchwork_PI3K2 = `PI-103t_ribbon` / `Pictilisibt_ribbon`
+patchwork_PI3K2[[1]] = patchwork_PI3K2[[1]] + theme(plot.title = element_blank())
+patchwork_PI3K2[[2]] = patchwork_PI3K2[[2]] + theme(plot.title = element_blank())
+
+
+# Save Figure 9:
+png(
+  filename = "Fig9_PI3K_RT.png",
+  units = "in",
+  width = 15,
+  height = 15,
+  res = 300
+)
+patchwork_PI3K2 + plot_annotation(tag_levels = "A")
 dev.off()
