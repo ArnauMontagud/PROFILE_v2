@@ -42,8 +42,8 @@ D. Analyse and plot results
 A processed dataframe is available to perform the analysis
 
 ## Scripts to reproduce figures of the paper
-- Figure 2: Available in Supplementary File 1.
-- Figure 3: Available in Supplementary File 2.
+- Figure 2: Available in Appendix 2.
+- Figure 3: Available in Appendix 3.
 - Figure 4: Available in the `TCGA_plot.Rmd` script in `Analysis of TCGA patients' simulations` folder.
 - Figure 5: Available in the `data_analysis.R` script in `Gradient inhibition of nodes` folder.
 - Figure 6: Available in the `CL_plot.Rmd` script in `Analysis of drug sensitivities across cell lines` folder.

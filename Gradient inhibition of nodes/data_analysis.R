@@ -4,6 +4,8 @@ author: "Arnau Montagud, arnau.montagud@gmail.com"
 date: "June 2021"
 ---
 
+# Note: All the scripts and data can be downloaded from https://github.com/ArnauMontagud/PROFILE_v2
+
 rm(list = ls(all = TRUE))
 
 # import and load packages ----

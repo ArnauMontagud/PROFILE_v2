@@ -5,6 +5,8 @@ date: "01/07/2021"
 output: html_document
 ---
 
+Note: All the scripts and data can be downloaded from https://github.com/ArnauMontagud/PROFILE_v2
+
 First import the required packages.
 
 ```{r setup, include=FALSE}
