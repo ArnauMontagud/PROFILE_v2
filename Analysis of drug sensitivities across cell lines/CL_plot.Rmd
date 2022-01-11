@@ -20,8 +20,10 @@ pacman::p_load(list.of.packages, character.only = TRUE)
 
 
 ```{r Data preparation, echo=FALSE, message=FALSE, warning=FALSE}
-load("data_plot_CL.Rdata")
-load("correspondance.Rdata")
+load("data_plot_CL.Rdata.txt")
+load("correspondance.Rdata.txt")
+# load("data_plot_CL.Rdata")
+# load("correspondance.Rdata")
 
 listed_nodes <- c("HSPs", "AKT", "TERT", "ERK", "EGFR", "MEK1_2", "PI3K", "AR", "Caspase8", "cFLAR", "GLUT1", "HIF-1", "MYC_MAX", "p14ARF", "ROS", "SPOP")
 my_cell_lines <- c("BPH-1", "PC-3", "RWPE2-W99", "22RV1", "VCaP", "NCI-H660", "DU-145", "LNCaP-Clone-FGC", "PWR-1E", "RWPE-1")

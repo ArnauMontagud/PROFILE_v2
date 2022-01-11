@@ -23,8 +23,10 @@ pacman::p_load(list.of.packages, character.only = TRUE)
 options(scipen = 999)
 
 # load data ----
-load("drugs_single.RData")
-load("drugs_double.RData")
+load("drugs_single.RData.txt")
+load("drugs_double.RData.txt")
+# load("drugs_single.RData")
+# load("drugs_double.RData")
 
 # Plotting WT ----
 WT_pheno %<>% mutate(activ = replace(activ, is.na(activ) == T, "rand")) %<>%
@@ -310,7 +312,8 @@ tot_Bliss_apop <- tot_Bliss %>% filter(Phenotype=="Apoptosis")
 
 # Plotting figures ----
 
-load("drugs_figures_datasets.RData")
+load("drugs_figures_datasets.RData.txt")
+# load("drugs_figures_datasets.RData")
 
 #Save Figure S36
 png(

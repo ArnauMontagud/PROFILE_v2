@@ -25,8 +25,10 @@ Please note that the data imported below have already been pre-processed accordi
 
 coloursG3 <- c("Low" = "yellowgreen", "Interm" = "orange3", "High" = "black")
 r <- 7.16
-load("data_plot_TCGA.RData")
-load("res.pca.RData")
+load("data_plot_TCGA.RData.txt")
+load("res.pca.RData.txt")
+# load("data_plot_TCGA.RData")
+# load("res.pca.RData")
 
 
 p_prolif <- ggplot(data_plot_TCGA, aes(x=Proliferation, fill=GG3)) +
