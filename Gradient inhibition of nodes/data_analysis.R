@@ -51,9 +51,9 @@ phenos <-
     "Apoptosis")
 WT_pheno_large %<>% filter(Phenotype %in% phenos)
 
-#Save Figure S31
+#Save Figure S27
 png(
-  filename = "FigS31_WT_pheno.png",
+  filename = "FigS27_WT_pheno.png",
   units = "px",
   width = 1000,
   height = 900,
@@ -93,9 +93,9 @@ single_large %>% .$Phenotype %>% unique()
 single_large1 <-
   single_large %>% mutate (activ = fct_recode(activ, Androgen = "AR", Androgen_EGF = "AR_EGF"))
 
-#Save Figure S30
+#Save Figure S35
 png(
-  filename = "FigS30_Single_all.png",
+  filename = "FigS35_Single_all.png",
   units = "px",
   width = 900,
   height = 900,
@@ -133,9 +133,9 @@ single_EGF$drug_ord <-
     drug
   )))))
 
-#Save Figure S29
+#Save Figure S34
 png(
-  filename = "FigS29_Single_EGF.png",
+  filename = "FigS34_Single_EGF.png",
   units = "px",
   width = 900,
   height = 700,
@@ -312,9 +312,9 @@ tot_Bliss_apop <- tot_Bliss %>% filter(Phenotype=="Apoptosis")
 
 load("drugs_figures_datasets.RData")
 
-#Save Figure S31
+#Save Figure S36
 png(
-  filename = "Fig_S31_Double_EGF_Proliferation.png",
+  filename = "Fig_S36_Double_EGF_Proliferation.png",
   units = "in",
   width = 11,
   height = 10,
@@ -354,9 +354,9 @@ ggplot(tot %>% filter(Phenotype == "Proliferation"), aes(dose1, dose2)) +
   )
 dev.off()
 
-#Save Figure S32
+#Save Figure S37
 png(
-  filename = "FigS32_Double_EGF_Apoptosis.png",
+  filename = "FigS37_Double_EGF_Apoptosis.png",
   units = "in",
   width = 11,
   height = 10,
@@ -420,9 +420,9 @@ bliss_pro <- ggplot(tot_Bliss_prolif, aes(dose1, dose2)) +
     axis.text.x = element_text(angle = 90)
   )
 
-# Save Figure S33
+# Save Figure S38
 png(
-  filename = "FigS33_Bliss_proliferation.png",
+  filename = "FigS38_Bliss_proliferation.png",
   units = "px",
   width = 1150,
   height = 1000,
@@ -460,9 +460,9 @@ bliss_apop <- ggplot(tot_Bliss_apop, aes(dose1, dose2)) +
     axis.text.x = element_text(angle = 90)
   )
 
-# Save Figure S34
+# Save Figure S39
 png(
-  filename = "FigS34_Bliss_apoptosis.png",
+  filename = "FigS39_Bliss_apoptosis.png",
   units = "px",
   width = 1150,
   height = 1000,
