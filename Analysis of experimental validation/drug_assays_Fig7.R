@@ -41,8 +41,8 @@ end_ids <-
     header = TRUE,
     sep = "\t",
     stringsAsFactors = FALSE
-  ) %>% pivot_longer(-X) %>% mutate(., id = as.integer(gsub("X", "", .$name))) %>% rename(., drug =
-                                                                                            X, nM = value) %>% select(-name)
+  ) %>% pivot_longer(-X) %>% mutate(., id = as.integer(gsub("X", "", .$name))) %>% 
+  rename(., drug = X, nM = value) %>% select(-name)
 
 end1 <- full_join(end1pre, end_ids)
 end1$nM <- as.integer(end1$nM)
