@@ -1,5 +1,5 @@
 ---
-  title: "Analysis of experimental validation, Figure 8"
+title: "Analysis of experimental validation, Figure 8"
 author: "Arnau Montagud, arnau.montagud@gmail.com"
 date: "February 2022"
 ---
