@@ -2,7 +2,7 @@
 
 This is a repository of code and analyses related to the paper "Patient-specific Boolean models of signaling networks guide personalized treatments". 
 
-The paper can accessed here: [https://www.biorxiv.org/content/10.1101/2021.07.28.454126v1](https://www.biorxiv.org/content/10.1101/2021.07.28.454126v1)
+The paper can accessed here: [https://elifesciences.org/articles/72626](https://elifesciences.org/articles/72626) and the preprint here: [https://www.biorxiv.org/content/10.1101/2021.07.28.454126v1](https://www.biorxiv.org/content/10.1101/2021.07.28.454126v1).
 
 Present code is an extension to use the [PROFILE tool](https://github.com/sysbio-curie/PROFILE), paper available [here](https://www.frontiersin.org/articles/10.3389/fphys.2018.01965), to simulate patient-specific drug inhibitions to find patient-specific treatments.
 
