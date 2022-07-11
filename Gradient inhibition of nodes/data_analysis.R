@@ -509,7 +509,7 @@ prolif <-
 prolif
 
 prolif_bliss <- ggplot(interesants_bliss, aes(dose1, dose2)) +
-  geom_tile(aes(fill = Bliss1), colour = "black") +
+  geom_tile(aes(fill = Bliss), colour = "black") +
   facet_grid(drug2 ~ drug1, switch = "both") +
   scale_x_continuous(
     breaks = c(0.0, 0.2, 0.4, 0.6, 0.8, 1.0),
@@ -572,7 +572,7 @@ prolif2 <-
 prolif2
 
 prolif_Bliss1 <- ggplot(interesants_bliss, aes(dose1, dose2)) +
-  geom_tile(aes(fill = Bliss1), colour = "black") +
+  geom_tile(aes(fill = Bliss), colour = "black") +
   facet_grid(drug2 ~ drug1, switch = "both") +
   scale_x_continuous(
     breaks = c(0.0, 0.2, 0.4, 0.6, 0.8, 1.0),
