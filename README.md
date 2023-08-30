@@ -6,6 +6,25 @@ The paper can accessed here: [https://elifesciences.org/articles/72626](https://
 
 Present code is an extension to use the [PROFILE tool](https://github.com/sysbio-curie/PROFILE), paper available [here](https://www.frontiersin.org/articles/10.3389/fphys.2018.01965), to simulate patient-specific drug inhibitions to find patient-specific treatments.
 
+## Releases
+### v2.0
+Code repository at the time of publication of the eLife paper "Patient-specific Boolean models of signalling networks guide personalised treatments" (<https://doi.org/10.7554/eLife.72626>).
+
+Added some minor changes from the published paper:
+- added Analysis of drug sensitivities across cell lines/data_plot_CL.Rdata
+- corrected bug in Gradient inhibition of nodes/data_analysis.R
+
+More information: <https://github.com/ArnauMontagud/PROFILE_v2/releases/tag/v2.0>
+
+### v.2.1
+Corrigendum for several files since v2.0.
+
+- Corrigendum for Appendix file: 
+  - Figures S5, S6 and S7 were updated to match the results of the Jupyter notebook.
+  - References in the legend of Figures 36 and 38 were modified.
+- Corrigendum for Montagud2022_interactions_sources.xlsx file: 
+  - Line 131, now correctly depicts SPOP as an inhibitor of DNA_Damage
+
 ## Brief tutorial on performing the gradient inhibition of nodes
 ### Requirements
 - Python version 3.0 or greater
