@@ -15,7 +15,7 @@ do
 				for k in ${suffix[@]}
 				do
 				model2_suffix=$model2$k
-					echo "python ./MBSS_DrugSim5_mn4.py "$model2_suffix" -d \""${drugs[i]}, ${drugs[j]}"\" -c \"0, 0.2, 0.4, 0.6, 0.8, 1\"" >> run_double.sh
+					echo "python ./PROFILE_DrugSim.py "$model2_suffix" -d \""${drugs[i]}, ${drugs[j]}"\" -c \"0, 0.2, 0.4, 0.6, 0.8, 1\"" >> run_double.sh
 				done
 			fi
 	done
